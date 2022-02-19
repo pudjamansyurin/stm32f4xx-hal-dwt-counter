@@ -1,11 +1,11 @@
-# STM32F4xx DWT Counter Module
+# STM32F4xx HAL DWT Counter Module
 
 ## How to use the module
 
 #### **`main.c`**
 
 ```c
-#include "stm32f4xx-dwt-counter-module/dwt-counter.h"
+#include "stm32f4xx-hal-dwt-counter/dwt-counter.h"
 
 int main(void)
 {

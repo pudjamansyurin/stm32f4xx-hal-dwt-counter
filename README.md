@@ -9,23 +9,27 @@
 
 int main(void)
 {
-  uint32_t start, cycles;
-
-  /* Initialize the counter */
-  DWT_Init();
+  uint32_t cycles;
+  float second, us;
 
   /* Super loop */
   while(1) {
-		/* Record start of operations */
-		start = DWT_GetCounter();
+		/* Start the counter */
+		DWT_Start();
 
 		/* Do some operations here */
 
-		/* Record end of operations */
-		cycles = DWT_GetCounter() - start;
-  }
+		/* Get CPU cycles count */
+		cycles = DWT_GetCounter();
 
-  /* DeInit the counter */
-  DWT_DeInit();
+		/* Get elapsed time */
+		second = DWT_GetTime();
+
+		/* Get elapsed time in us */
+		us = DWT_GetTime_us();
+
+		/* Stop the counter */
+		DWT_Stop();
+  }
 }
 ```

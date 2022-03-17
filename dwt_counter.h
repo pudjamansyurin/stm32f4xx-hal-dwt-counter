@@ -21,7 +21,6 @@ __STATIC_INLINE void DWT_Start(void)
 __STATIC_INLINE void DWT_Stop(void)
 {
   DWT->CTRL &= ~DWT_CTRL_CYCCNTENA_Msk;
-  DWT->CYCCNT = 0;
   CoreDebug->DEMCR &= ~CoreDebug_DEMCR_TRCENA_Msk;
 }
 
@@ -38,7 +37,7 @@ __STATIC_INLINE uint32_t DWT_GetCounter(void)
 
 __STATIC_INLINE float DWT_GetTime(void)
 {
-  return ((float) DWT->CYCCNT / HAL_RCC_GetHCLKFreq());
+  return ((float)DWT->CYCCNT / HAL_RCC_GetHCLKFreq());
 }
 
 __STATIC_INLINE float DWT_GetTime_ms(void)

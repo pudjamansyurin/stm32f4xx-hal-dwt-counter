@@ -10,7 +10,7 @@
 int main(void)
 {
   uint32_t cycles;
-  float second, us;
+  float s, ms, us, ns;
 
   /* Super loop */
   while(1) {
@@ -20,13 +20,19 @@ int main(void)
 		/* Do some operations here */
 
 		/* Get CPU cycles count */
-		cycles = DWT_GetCounter();
+		cycles = DWT_GetCycle();
 
-		/* Get elapsed time */
-		second = DWT_GetTime();
+		/* Get elapsed time in seconds */
+		s = DWT_GetTime_s();
 
-		/* Get elapsed time in us */
+		/* Get elapsed time in mili seconds */
+		ms = DWT_GetTime_us();
+
+		/* Get elapsed time in micro seconds */
 		us = DWT_GetTime_us();
+
+		/* Get elapsed time in nano seconds */
+		ns = DWT_GetTime_ns();
 
 		/* Stop the counter */
 		DWT_Stop();

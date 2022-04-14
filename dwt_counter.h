@@ -10,6 +10,9 @@
 
 #include "stm32f4xx_hal.h"
 
+/* Public macros */
+#define CYC_TO_TIME(__X__) ((float) __X__ / HAL_RCC_GetHCLKFreq())
+
 /* Public function declarations & definitions */
 __STATIC_INLINE void DWT_Start(void)
 {
@@ -21,6 +24,7 @@ __STATIC_INLINE void DWT_Start(void)
 __STATIC_INLINE void DWT_Stop(void)
 {
   DWT->CTRL &= ~DWT_CTRL_CYCCNTENA_Msk;
+  DWT->CYCCNT = 0;
   CoreDebug->DEMCR &= ~CoreDebug_DEMCR_TRCENA_Msk;
 }
 
@@ -30,29 +34,29 @@ __STATIC_INLINE void DWT_Restart(void)
   DWT_Start();
 }
 
-__STATIC_INLINE uint32_t DWT_GetCounter(void)
+__STATIC_INLINE uint32_t DWT_GetCycle(void)
 {
   return (DWT->CYCCNT);
 }
 
-__STATIC_INLINE float DWT_GetTime(void)
+__STATIC_INLINE float DWT_GetTime_s(void)
 {
-  return ((float)DWT->CYCCNT / HAL_RCC_GetHCLKFreq());
+  return (CYC_TO_TIME(DWT->CYCCNT));
 }
 
 __STATIC_INLINE float DWT_GetTime_ms(void)
 {
-  return (DWT_GetTime() * 1000);
+  return (DWT_GetTime_s() * 1000);
 }
 
 __STATIC_INLINE float DWT_GetTime_us(void)
 {
-  return (DWT_GetTime() * 1000000);
+  return (DWT_GetTime_ms() * 1000);
 }
 
 __STATIC_INLINE float DWT_GetTime_ns(void)
 {
-  return (DWT_GetTime() * 1000000000);
+  return (DWT_GetTime_us() * 1000);
 }
 
 #endif /* STM32F4XX_DWT_COUNTER_DWT_COUNTER_H_ */

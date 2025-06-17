@@ -5,10 +5,10 @@
  *      Author: pujak
  */
 
-#ifndef STM32F4XX_DWT_COUNTER_DWT_COUNTER_H_
-#define STM32F4XX_DWT_COUNTER_DWT_COUNTER_H_
+#ifndef STM32X_DWT_COUNTER_DWT_COUNTER_H_
+#define STM32X_DWT_COUNTER_DWT_COUNTER_H_
 
-#include "stm32f4xx_hal.h"
+#include "main.h"
 
 /* Public macros */
 #define CYC_TO_TIME(__X__) ((float) __X__ / HAL_RCC_GetHCLKFreq())
@@ -59,4 +59,4 @@ __STATIC_INLINE float DWT_GetTime_ns(void)
   return (DWT_GetTime_us() * 1000);
 }
 
-#endif /* STM32F4XX_DWT_COUNTER_DWT_COUNTER_H_ */
+#endif /* STM32X_DWT_COUNTER_DWT_COUNTER_H_ */
